@@ -3,9 +3,9 @@ import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css'
 
-import UsersList from "./components/UsersList";
-import CreateUser from "./components/CreateUser";
-import RetrieveUser from "./components/RetrieveUser";
+import UsersList from "./components/user/UsersList";
+import CreateUser from "./components/user/CreateUser";
+import RetrieveUser from "./components/user/RetrieveUser";
 
 
 

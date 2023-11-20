@@ -2,17 +2,17 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Card, Col, Container, Row} from "react-bootstrap";
-import Layout from "./Layout";
+import Layout from "../layout/Layout";
+import {getUser} from "../../services/user.service";
 
 const RetrieveUser = () => {
     const {id} = useParams()
-    const getUserEndpoint = `http://localhost:4000/v1/user/${id}`;
 
     const [user,setUser] = useState({})
 
     const fetchUser = async () => {
         try{
-            const {data:{user:userRes}} = await axios.get(`${getUserEndpoint}`)
+            const userRes = await getUser(id)
             setUser(userRes)
         }catch (err){
             setUser(null)
