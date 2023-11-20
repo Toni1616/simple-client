@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css'
+
+import UsersList from "./components/UsersList";
+import CreateUser from "./components/CreateUser";
+import RetrieveUser from "./components/RetrieveUser";
+
+
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<UsersList/>}/>
+                <Route path="/create" element={<CreateUser/>}/>
+                <Route path="/:id" element={<RetrieveUser />}/>
+            </Routes>
+
+        </BrowserRouter>
+
+    </>
   );
 }
 
-export default App;
+export default App
