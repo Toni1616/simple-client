@@ -9,7 +9,7 @@ const TopNavigation = () => {
                     <Navbar.Brand as={NavLink} to="/">Home</Navbar.Brand>
                     <Nav className="justify-content-end">
                         {/*<Nav.Link as={NavLink} to={"/"}>Home</Nav.Link>*/}
-                        <Nav.Link as={NavLink} to={"/create"}>Create</Nav.Link>
+                        <Nav.Link as={NavLink} to={"/create"} className="badge text-white bg-secondary text-wrap">Create</Nav.Link>
                         {/*<Nav.Link as={NavLink} to={"/home"}>Home</Nav.Link>*/}
                     </Nav>
                 </Container>

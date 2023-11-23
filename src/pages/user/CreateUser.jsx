@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {Button, Col, Container, Form, FormControl, FormLabel, Row} from "react-bootstrap";
 import axios from "axios";
 import {toast} from "react-toastify";
-import Layout from "../layout/Layout";
-import {createUserService} from "../../services/user.service";
+import Layout from "../../components/layout/Layout";
+import {createUser} from "../../services/user.service";
 
 const CreateUser = () => {
 
@@ -13,7 +13,7 @@ const CreateUser = () => {
     const [city,setCity] = useState("")
     const [country,setCountry] = useState("")
 
-    const createUser = async (e) => {
+    const submitForm = async (e) => {
         e.preventDefault()
 
         const payload = {
@@ -21,11 +21,11 @@ const CreateUser = () => {
         }
 
         try {
-            const res = await createUserService(payload)
-            const userId = res.data.user.id
+            const apiResponse = await createUser(payload)
+            const userId = apiResponse.data.user.id
 
-            if (res.data?.status){
-                toast.success(`User ${userId} is created!`)
+            if (apiResponse.data?.status){
+                toast.success(`User ${name} is created!`)
 
                 setName("")
                 setEmail("")
@@ -36,10 +36,10 @@ const CreateUser = () => {
                 toast.warn('An error has occur.')
             }
         }catch (err){
-            const {data:{errors}} = err.response
+            const {data: {errors}} = err.response
             const message = errors.body[0]?.message
             toast.error(message[0].toUpperCase() + message.substring(1))
-            console.log(err)
+            // console.log(err)
         }
 
     }
@@ -48,7 +48,7 @@ const CreateUser = () => {
         <Layout>
             <Row className="justify-content-center">
                 <Col lg={6}>
-                    <Form id="createForm" onSubmit={createUser}>
+                    <Form id="createForm" onSubmit={submitForm}>
                         <Form.Group className="mb-5">
                             <FormLabel>Name</FormLabel>
                             <FormControl

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import axios from "axios";
-import {Card, Col, Container, Row} from "react-bootstrap";
-import Layout from "../layout/Layout";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import Layout from "../../components/layout/Layout";
 import {getUser} from "../../services/user.service";
 
 const RetrieveUser = () => {
@@ -12,8 +12,8 @@ const RetrieveUser = () => {
 
     const fetchUser = async () => {
         try{
-            const userRes = await getUser(id)
-            setUser(userRes)
+            const apiResponse = await getUser(id)
+            setUser(apiResponse)
         }catch (err){
             setUser(null)
         }
@@ -37,6 +37,19 @@ const RetrieveUser = () => {
                                 {user.city && user.country &&(
                                     <p>{user.city} - {user.country}</p>
                                 )}
+                                <Button
+                                    type={"button"}
+                                    variant={"primary"}
+                                    as={NavLink}
+                                    to={`/edit/${user.id}`}
+                                >Edit</Button>
+                                <Button
+                                    type={"button"}
+                                    variant={"danger"}
+                                    className={"m-1"}
+                                    as={NavLink}
+                                    to={`/remove/${user.id}`}
+                                >Remove</Button>
                             </Card.Body>
                         </Card>
                     </Col>
